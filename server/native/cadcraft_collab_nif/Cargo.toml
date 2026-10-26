@@ -1,0 +1,16 @@
+[package]
+name = "cadcraft_collab_nif"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+publish = false
+
+# Built by Rustler from the Elixir server, not part of the CADCraft workspace.
+[workspace]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.38"
+cadcraft-collab = { path = "../../../crates/collab" }
