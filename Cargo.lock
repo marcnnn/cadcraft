@@ -601,6 +601,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "cadcraft-collab"
+version = "0.13.0"
+dependencies = [
+ "cadcraft-constraints",
+ "cadcraft-doc",
+ "cadcraft-geom",
+ "cadcraft-io",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "cadcraft-color"
 version = "0.13.0"
 dependencies = [

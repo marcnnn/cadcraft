@@ -633,9 +633,15 @@ pub fn moved_anchors(d: &Drawing, before: &Drawing) -> Vec<(u32, Vec2)> {
 
 /// True when every interpretable constraint holds at the current geometry.
 pub fn all_satisfied(d: &Drawing) -> bool {
+    unsatisfied(d).is_empty()
+}
+
+/// Interpretable constraints (by id) that do not hold at the current geometry, by the same test
+/// as [`all_satisfied`].
+pub fn unsatisfied(d: &Drawing) -> Vec<u32> {
     let handles: Vec<Handle> = d.constraints.iter().flat_map(|c| c.refs.iter().map(|r| r.handle)).collect();
     let tol = scale_tol(&Model::build(d, &handles).x0) * 10.0;
-    residuals(d).iter().all(|(_, r)| r.is_none_or(|v| v <= tol))
+    residuals(d).into_iter().filter(|(_, r)| r.is_some_and(|v| v > tol)).map(|(id, _)| id).collect()
 }
 
 /// Check that a constraint's references make sense for its type.
